@@ -9,19 +9,20 @@
 <style>
 /* ===== RESET & ROOT ===== */
 :root {
-  --c1: #ff006e;
-  --c2: #8338ec;
-  --c3: #3a86ff;
-  --c4: #06d6a0;
-  --c5: #ffbe0b;
-  --c6: #fb5607;
-  --bg: #07071a;
-  --bg2: #0d0d2b;
-  --card: #10112a;
-  --card2: #131430;
+  --c1: #67e8d0;
+  --c2: #42c7b0;
+  --c3: #8db8c4;
+  --c4: #92d8c8;
+  --c5: #c4d0d0;
+  --c6: #a9b9bf;
+  --accent: #67e8d0;
+  --bg: #0a1117;
+  --bg2: #101a22;
+  --card: #121d25;
+  --card2: #17242d;
   --border: rgba(255,255,255,0.1);
-  --text: #eeeeff;
-  --muted: rgba(200,200,240,0.6);
+  --text: #edf5f3;
+  --muted: rgba(205,220,220,0.68);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -39,7 +40,7 @@ body {
 #cur-ring { width: 34px; height: 34px; border: 1.5px solid var(--c3); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.7; }
 
 /* ===== THREE.JS BG ===== */
-#bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+#bg-canvas { display: none; }
 
 /* ===== ANIMATED ORBS ===== */
 .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 2; animation: orbF ease-in-out infinite; }
@@ -56,7 +57,7 @@ body {
   background-size: 55px 55px; }
 
 /* ===== FLOATING PARTICLES ===== */
-.pts { position: fixed; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.pts { display: none; }
 .pt { position: absolute; border-radius: 50%; opacity: 0; animation: ptF linear infinite; }
 @keyframes ptF { 0%{opacity:0;transform:translateY(100vh) scale(0)} 10%{opacity:0.5} 90%{opacity:0.2} 100%{opacity:0;transform:translateY(-5vh) scale(1)} }
 
@@ -163,8 +164,8 @@ nav {
 @keyframes spinR { to { transform: rotate(360deg); } }
 .photo-inner { position: absolute; inset: 4px; border-radius: 50%; z-index: 1; overflow: hidden;
   background: linear-gradient(135deg, var(--c2), var(--c3));
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Syne', sans-serif; font-size: 3.2rem; font-weight: 800; color: #ffffff; }
+  display: flex; align-items: center; justify-content: center; }
+.photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; border-radius: 50%; display: block; }
 
 .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; }
 .stat { text-align: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 8px; }
@@ -182,6 +183,27 @@ nav {
   animation: sBar 2s ease infinite; }
 @keyframes sBar { 0%,100%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== RESTRAINED VISUAL SYSTEM ===== */
+.orb { display: none; }
+.grid-bg { opacity: .35; background-image: linear-gradient(rgba(141,184,196,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(141,184,196,0.035) 1px, transparent 1px); }
+.nav-logo, .hn2, .hn3, .stat-n, .gw, .f-logo { background: none; color: var(--accent); -webkit-text-fill-color: initial; animation: none; }
+.nav-logo { white-space: nowrap; }
+.nav-links { gap: 18px; }
+.nav-links a { font-size: .74rem; }
+.nav-hire { white-space: nowrap; }
+.nav-hire, .btn-p { background: var(--accent); color: #071316; box-shadow: 0 8px 24px rgba(103,232,208,.16); }
+.nav-hire:hover, .btn-p:hover { box-shadow: 0 10px 28px rgba(103,232,208,.25); }
+.photo-wrap::before { background: var(--accent); animation: none; }
+.photo-inner { background: var(--card2); }
+.sk-fill, .sf1, .sf2, .sf3, .sf4 { background: var(--accent); }
+.c1, .c2, .c3, .c4, .c5, .c6 { background: rgba(103,232,208,.08); border-color: rgba(103,232,208,.24); color: var(--accent); }
+.pj-icon, .int-logo, .con-ico { background: rgba(103,232,208,.1) !important; }
+.pj-glow { background: var(--accent) !important; }
+.pj-card, .int-c, .cert-c, .ach-c, .con-box { border-top-color: rgba(103,232,208,.42); }
+.int-c::before, .cert-c::before, .ach-c::before, .con-box::before { background: var(--accent); }
+.score-gold, .score-blue, .score-green, .bg, .bb, .bn, .int-st { background: rgba(103,232,208,.08); border-color: rgba(103,232,208,.24); color: var(--accent); }
+.bg-accent1, .bg-accent2, .bg-accent3, .bg-accent4 { background: linear-gradient(180deg, transparent, rgba(103,232,208,.025), transparent); }
 
 /* ===== SECTION BASE ===== */
 .sw { max-width: 1300px; margin: 0 auto; padding: 90px 5%; }
@@ -426,7 +448,7 @@ footer { text-align: center; padding: 36px 5%; border-top: 1px solid var(--borde
     <li><a href="#projects">Projects</a></li>
     <li><a href="#internships">Internships</a></li>
     <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#achievements">Awards</a></li>
+    <li><a href="#achievements">ACHIEVEMENTS</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="mailto:dpkraj.t@gmail.com" class="nav-hire">Hire Me →</a>
@@ -439,7 +461,7 @@ footer { text-align: center; padding: 36px 5%; border-top: 1px solid var(--borde
   <a href="#projects">Projects</a>
   <a href="#internships">Internships</a>
   <a href="#certifications">Certifications</a>
-  <a href="#achievements">Awards &amp; Activities</a>
+  <a href="#achievements">ACHIEVEMENTS &amp; Activities</a>
   <a href="#contact">Contact</a>
 </div>
 
@@ -450,8 +472,7 @@ footer { text-align: center; padding: 36px 5%; border-top: 1px solid var(--borde
       <div class="hero-tag"><span class="tag-dot"></span>Aspiring Software Developer &amp; Data Analyst</div>
       <h1 class="hero-name">
         <span class="hn1">Hi, I'm</span>
-        <span class="hn2">Deepak Raj</span>
-        <span class="hn3">T</span>
+        <span class="hn2">Deepak Raj T</span>
       </h1>
       <div class="hero-type"><span id="typed"></span><span class="t-cursor"></span></div>
       <p class="hero-desc">Computer Science undergraduate with hands-on experience building <strong>full-stack web applications</strong> using <strong>PHP, Flask, and MySQL</strong>. Comfortable across the stack — from designing clean UIs to writing backend logic and managing relational databases.</p>
@@ -464,7 +485,7 @@ footer { text-align: center; padding: 36px 5%; border-top: 1px solid var(--borde
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub
         </a>
-        <a href="https://linkedin.com/in/deepak3104" target="_blank" class="soc">
+        <a href="https://linkedin.com/in/deepak3108" target="_blank" class="soc">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           LinkedIn
         </a>
@@ -480,7 +501,9 @@ footer { text-align: center; padding: 36px 5%; border-top: 1px solid var(--borde
     </div>
     <div class="hero-right">
       <div class="photo-wrap">
-        <div class="photo-inner">DR</div>
+        <div class="photo-inner">
+          <img src="78610.1.jpg" alt="Deepak Raj T">
+        </div>
       </div>
       <div class="stats-row">
         <div class="stat"><div class="stat-n">3+</div><div class="stat-l">Projects</div></div>
@@ -795,11 +818,11 @@ footer { text-align: center; padding: 36px 5%; border-top: 1px solid var(--borde
 <section id="achievements" class="bg-accent4">
   <div class="sw">
     <div class="sl">Recognition &amp; Engagement</div>
-    <h2 class="st">Awards &amp; <span class="gw">Activities</span></h2>
+    <h2 class="st">ACHIEVEMENTS &amp; <span class="gw">Activities</span></h2>
     <div class="ach-wrap rv">
-      <!-- AWARDS -->
+      <!-- ACHIEVEMENTS -->
       <div>
-        <div class="sl" style="margin-bottom:16px">Honors &amp; Awards</div>
+        <div class="sl" style="margin-bottom:16px">Honors &amp; ACHIEVEMENTS</div>
         <div class="ach-g">
           <div class="ach-c">
             <div class="ach-ico">🥈</div>
